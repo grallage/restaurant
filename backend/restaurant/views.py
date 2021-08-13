@@ -101,9 +101,9 @@ def create_checkout_session(request):
         # ],
         line_items=carts,
         mode="payment",
-        success_url="http://localhost:3000/",
+        success_url=settings.FRONTEND_URL,
         # success_url="http://localhost:3000?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url="http://localhost:3000/cart",
+        cancel_url="{url}/cart".format(url=settings.FRONTEND_URL),
         metadata={
             "phone": phone,
             "remark": remark,
