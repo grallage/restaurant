@@ -22,14 +22,15 @@ export function withAuth<P extends object>(refreshInterval?: number) {
       }
 
       if (!!!localStorage.getItem("token")) {
-        router.push("http://localhost:3000");
+        // router.push(`${process.env.NEXTAUTH_URL}`);
+        router.push("/auth/signin");
         return <div>请登录</div>;
       } else {
         return <Component session={session} {...props} />;
       }
 
       // if (!loading && !session) {
-      //   router.push("http://localhost:3000");
+      //   router.push(`${process.env.NEXTAUTH_URL}`);
       // }
 
       // return <Component session={session} {...props} />;

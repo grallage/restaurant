@@ -38,7 +38,8 @@ export default function SignIn({ providers, csrfToken }) {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      router.push("http://localhost:3000");
+      // router.push(`${process.env.NEXTAUTH_URL}`);
+      router.push("/");
       // return <div>已登录</div>;
     }
   });
