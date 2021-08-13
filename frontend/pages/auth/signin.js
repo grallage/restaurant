@@ -22,9 +22,10 @@ import {
 } from "../../components/auth/AuthElements";
 import { useFormControls } from "../../components/auth/AuthFormControls";
 
-import { notify } from "constants/Notifications";
-
-export default function SignIn({ providers, csrfToken }) {
+export default function SignIn({
+  providers,
+  // csrfToken
+}) {
   const {
     formValues,
     setFormValues,
@@ -137,8 +138,11 @@ export default function SignIn({ providers, csrfToken }) {
 
 export async function getServerSideProps(context) {
   const providers = await getProviders();
-  const csrfToken = await getCsrfToken(context);
+  // const csrfToken = await getCsrfToken(context);
   return {
-    props: { providers, csrfToken },
+    props: {
+      providers,
+      // csrfToken
+    },
   };
 }
