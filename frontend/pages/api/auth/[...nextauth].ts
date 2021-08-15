@@ -4,7 +4,7 @@ import Providers from "next-auth/providers";
 import axios from "axios";
 import { JwtUtils } from "../../../constants/Utils";
 
-const debug = true;
+const debug = false;
 
 namespace NextAuthUtils {
   export const refreshToken = async function (refreshToken) {
@@ -150,6 +150,10 @@ const settings: NextAuthOptions = {
               { access_token: accessToken }
             );
 
+            console.log(
+              `获取服务器返回信息：${response}， ${Object.keys(response?.data)}`
+            );
+
             const { access_token, refresh_token } = response.data;
 
             token = {
@@ -158,6 +162,8 @@ const settings: NextAuthOptions = {
               refreshToken: refresh_token,
               loginType: "github",
             };
+
+            console.log(`## token=${token}`);
 
             return token;
           } catch (error) {
