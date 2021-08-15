@@ -31,14 +31,16 @@ namespace NextAuthUtils {
 const settings: NextAuthOptions = {
   debug: false,
   // debug: process.env.NODE_ENV === "development",
-  secret: process.env.SESSION_SECRET,
-  session: {
-    jwt: true,
-    maxAge: 24 * 60 * 60, // 24 hours
-  },
-  jwt: {
-    secret: process.env.JWT_SECRET,
-  },
+
+  // secret: process.env.SESSION_SECRET,
+  // session: {
+  //   jwt: true,
+  //   maxAge: 24 * 60 * 60, // 24 hours
+  // },
+  // jwt: {
+  //   secret: process.env.JWT_SECRET,
+  // },
+
   providers: [
     Providers.Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
