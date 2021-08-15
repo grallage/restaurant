@@ -4,7 +4,7 @@ import Providers from "next-auth/providers";
 import axios from "axios";
 import { JwtUtils } from "../../../constants/Utils";
 
-const debug = false;
+const debug = true;
 
 namespace NextAuthUtils {
   export const refreshToken = async function (refreshToken) {
@@ -160,7 +160,7 @@ const settings: NextAuthOptions = {
               refreshToken: refresh_token,
               loginType: "github",
             };
-
+            console.log(`返回token=${token.accessToken}`);
             return token;
           } catch (error) {
             console.log(
@@ -178,6 +178,7 @@ const settings: NextAuthOptions = {
 
       // user was signed in previously, we want to check if the token needs refreshing
       // token has been invalidated, try refreshing it
+      console.log(`检查token是否过期`);
       if (
         token?.refreshToken &&
         JwtUtils.isJwtExpired(token.accessToken as string)
