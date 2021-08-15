@@ -150,9 +150,7 @@ const settings: NextAuthOptions = {
               { access_token: accessToken }
             );
 
-            console.log(
-              `获取服务器返回信息：${response}， ${Object.keys(response?.data)}`
-            );
+            console.log(`获取服务器返回信息: ${Object.keys(response?.data)}`);
 
             const { access_token, refresh_token } = response.data;
 
@@ -162,8 +160,6 @@ const settings: NextAuthOptions = {
               refreshToken: refresh_token,
               loginType: "github",
             };
-
-            console.log(`## token=${token}`);
 
             return token;
           } catch (error) {
@@ -229,6 +225,13 @@ const settings: NextAuthOptions = {
     // error: '/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // (used for check email message)
     // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
+  events: {
+    async error(e) {
+      console.log("##### 触发错误");
+      console.log(e);
+      console.log(Object.keys(e));
+    },
   },
 };
 
