@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const debug = false;
+const debug = true;
 
 export namespace JwtUtils {
   export const isJwtExpired = (token: string) => {

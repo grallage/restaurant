@@ -4,7 +4,7 @@ import Providers from "next-auth/providers";
 import axios from "axios";
 import { JwtUtils } from "../../../constants/Utils";
 
-const debug = true;
+const debug = false;
 
 namespace NextAuthUtils {
   export const refreshToken = async function (refreshToken) {
