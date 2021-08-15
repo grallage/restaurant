@@ -14,10 +14,8 @@ stripe.api_key = STRIPE_TEST_SECRET_KEY
 
 class CustomUserModelManager(BaseUserManager):
     def create_user(self, username, email, password=None):
-        # stripe
+        # create stripe customer
         stripe_customer = stripe.Customer.create(email=email, name=username)
-
-        # user.stripe_customer_id = stripe_customer.id
 
         user = self.model(
             username=username,

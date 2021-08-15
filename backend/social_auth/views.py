@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.conf import settings
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter

@@ -9,8 +9,10 @@ from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = DJANGO_SECRET_KEY
-DEBUG = False
+DEBUG = True
 FRONTEND_URL = "http://localhost:3000"
+BACKEND_URL = "http://localhost:8000"
+# STATIC_ROOT = "/home/lynn2022/restaurant/backend/static"
 ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -44,14 +46,6 @@ INSTALLED_APPS = [
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
-        # # For each OAuth based provider, either add a ``SocialApp``
-        # # (``socialaccount`` app) containing the required client
-        # # credentials, or list them here:
-        # "APP": {
-        #     "client_id": "123",
-        #     "secret": "456",
-        #     "key": ""
-        # },
         "SCOPE": [
             "profile",
             "email",
@@ -60,18 +54,13 @@ SOCIALACCOUNT_PROVIDERS = {
             "access_type": "online",
         },
     },
-    "github": {
-        # For each provider, you can choose whether or not the
-        # email address(es) retrieved from the provider are to be
-        # interpreted as verified.
-        "VERIFIED_EMAIL": True
-    },
+    "github": {"VERIFIED_EMAIL": True},
 }
-# we are turning off email verification for now
+# turn off email verification
 SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
 SOCIALACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
-LOGIN_URL = "https://localhost:8000/dj-rest-auth/login"
+LOGIN_URL = BACKEND_URL + "/dj-rest-auth/login"
 
 
 # --------------------  django-allauth }  --------------------
@@ -112,22 +101,17 @@ SIMPLE_JWT = {
     "USER_ID_CLAIM": "user_id",
     "SIGNING_KEY": JWT_SECRET_KEY,
     "AUTH_HEADER_TYPES": ("JWT",),
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
 }
 # --------------------  djangorestframework-simplejwt }  --------------------
 
 # --------------------  django-cors-headers }  --------------------
 
-# CORS_ORIGIN_ALLOW_ALL = True  # only for dev environment!, this should be changed before you push to production
-
 # corsheaders setting
+# CORS_ORIGIN_ALLOW_ALL = True  # only for dev environment!, this should be changed before you push to production
 CORS_ALLOW_CREDENTIALS = True
-# CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-]
+CORS_ALLOWED_ORIGINS = [FRONTEND_URL]
 # --------------------  django-cors-headers }  --------------------
 
 
@@ -137,16 +121,11 @@ CORS_ALLOWED_ORIGINS = [
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        # 前两个默认
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
-        # "dj_rest_auth.utils.JWTCookieAuthentication",
-        # # "rest_framework.authentication.TokenAuthentication",
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
         # "rest_framework.authentication.TokenAuthentication",
     ),
-    # 测试
-    # "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
 # --------------------  django-rest-framework }  --------------------
