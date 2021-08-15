@@ -14,7 +14,9 @@ export default function Home({ menuList }) {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/", undefined, { shallow: true });
+    router.push(`${process.env.NEXT_SERVER_HOST}`, undefined, {
+      shallow: true,
+    });
   }, []);
 
   return (
