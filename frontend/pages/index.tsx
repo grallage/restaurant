@@ -13,11 +13,11 @@ import Head from "containers/head/Head";
 export default function Home({ menuList }) {
   const router = useRouter();
 
-  // useEffect(() => {
-  //   router.push(`${process.env.NEXT_SERVER_HOST}`, undefined, {
-  //     shallow: true,
-  //   });
-  // }, []);
+  useEffect(() => {
+    router.push(`${process.env.NEXT_SERVER_HOST}`, undefined, {
+      shallow: true,
+    });
+  }, []);
 
   return (
     <>
