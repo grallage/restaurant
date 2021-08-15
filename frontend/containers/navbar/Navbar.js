@@ -39,7 +39,7 @@ const Navbar = () => {
       <Start>
         <LogoWrapper>
           <LogoIcon />
-          <Link href={`${process.env.NEXT_SERVER_HOST}`}>
+          <Link href="/">
             <LogoText>Lynn餐馆</LogoText>
           </Link>
         </LogoWrapper>

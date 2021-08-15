@@ -47,7 +47,7 @@ export default function SignIn({ providers }: Props) {
       !!localStorage.getItem("token") &&
       !JwtUtils.isJwtExpired(localStorage.getItem("token") as string)
     ) {
-      router.push(`${process.env.NEXT_SERVER_HOST}`);
+      router.push("/");
     } else {
       setLoading(false);
     }

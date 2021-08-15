@@ -78,7 +78,6 @@ export const CenterItemLink = styled(
   ({ children, isIndexPage, to, ...props }) => {
     return !isIndexPage ? (
       <Link href={to}>
-        {/* <Link href={to} as="/" scroll={false}> */}
         <a {...props}>{children}</a>
       </Link>
     ) : (
