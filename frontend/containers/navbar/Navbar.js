@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 import {
@@ -19,22 +19,16 @@ import {
   CloseBtn,
 } from "components/navbar/NavbarElements";
 // AUTH
-import { signIn, signOut, useSession, getProviders } from "next-auth/client";
+import { signIn, signOut } from "next-auth/client";
 import { useRouter } from "next/router";
 
 import { useAuth } from "../../constants/Hooks";
 import { navItems } from "./data";
 
 const Navbar = () => {
-  const { session, loading } = useAuth(20 * 100);
+  const { session, loading } = useAuth();
   const { pathname } = useRouter();
   const [hideLinks, setHideLinks] = useState(true);
-
-  // const { session, loading } = useSession();
-
-  useEffect(() => {
-    console.log("#### router:", pathname);
-  }, []);
 
   const changeNavState = () => {
     setHideLinks(!hideLinks);
@@ -107,6 +101,7 @@ const Navbar = () => {
               <UserLink
                 onClick={() => {
                   localStorage.removeItem("token");
+                  localStorage.removeItem("refreshToken");
                   signOut();
                 }}
               >

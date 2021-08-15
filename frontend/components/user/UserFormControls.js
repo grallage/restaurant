@@ -22,7 +22,7 @@ const Form = async (
 ) => {
   const { axios } = useAxios();
   const { user_id } = jwt.decode(localStorage.getItem("token"));
-  let url = `${process.env.HOST}/user/${user_id}/`;
+  let url = `${process.env.NEXT_PUBLIC_HOST}/user/${user_id}/`;
   let form = new FormData();
   form.append("username", values.username);
   form.append("email", values.email);

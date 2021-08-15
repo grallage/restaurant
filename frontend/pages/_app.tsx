@@ -1,9 +1,8 @@
-// import '../styles/globals.css'
+// import "../styles/globals.css";
 import { AppProps } from "next/app";
 import StyledComponentsProvider from "../constants/StyledComponentsConfig";
 import { Provider as NextAuthProvider } from "next-auth/client";
 import { NotificationsContainer } from "constants/Notifications";
-
 import "react-toastify/dist/ReactToastify.min.css";
 
 export default function App({ Component, pageProps }: AppProps) {

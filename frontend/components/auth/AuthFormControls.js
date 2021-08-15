@@ -6,12 +6,9 @@ import { signIn } from "next-auth/client";
 
 const initialFormValues = {
   // form fields
-  username: "t4",
-  password: "111111",
-  email: "t4@t.com",
-  //   username: "",
-  //   password: "",
-  //   email: "",
+  username: "",
+  password: "",
+  email: "",
 
   // form status
   formSubmitted: false,
@@ -43,7 +40,7 @@ const SignupForm = async (
   setErrors
 ) => {
   const { axios } = useAxios();
-  let url = `${process.env.HOST}/dj-rest-auth/registration/`;
+  let url = `${process.env.NEXT_PUBLIC_HOST}/dj-rest-auth/registration/`;
   let form = new FormData();
   form.append("username", values.username);
   form.append("password1", values.password);

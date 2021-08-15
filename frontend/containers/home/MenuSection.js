@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+
 import {
   Container,
   Title,
@@ -13,15 +13,7 @@ import {
   CardContent,
   CardTitle,
   CardBody,
-  CardEmpty,
 } from "../../components/menu/MenuElements";
-
-// resource
-import menuItemPic from "public/images/home/menu_item.jpg";
-
-const styling = {
-  backgroundImage: "url('/images/home/menu_item.jpg')",
-};
 
 const MenuSection = ({ menuList }) => {
   const [filterMenuName, setFilterMenuName] = useState("");
@@ -58,9 +50,10 @@ const MenuSection = ({ menuList }) => {
             >
               所有
             </MenuItem>
-            {menuItems.map((item) => {
+            {menuItems.map((item, index) => {
               return (
                 <MenuItem
+                  key={index}
                   onClick={() => changeFilterMenuName(`${item}`)}
                   className={`${filterMenuName === `${item}` ? "active" : ""}`}
                 >

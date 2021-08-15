@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Container,
   GridWrapper,
@@ -44,7 +45,9 @@ const HeroSection = () => {
             </TextContent>
           </div>
           <ButtonGroup>
-            <Button>立即下单</Button>
+            <Link href="/cart">
+              <Button>立即下单</Button>
+            </Link>
           </ButtonGroup>
         </GridColumnText>
 

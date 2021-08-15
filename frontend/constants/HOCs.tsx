@@ -22,9 +22,8 @@ export function withAuth<P extends object>(refreshInterval?: number) {
       }
 
       if (!!!localStorage.getItem("token")) {
-        // router.push(`${process.env.NEXTAUTH_URL}`);
         router.push("/auth/signin");
-        return <div>请登录</div>;
+        return <div>正在转向登录页面，请耐心等候。</div>;
       } else {
         return <Component session={session} {...props} />;
       }

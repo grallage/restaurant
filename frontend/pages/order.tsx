@@ -2,9 +2,11 @@ import React from "react";
 import dynamic from "next/dynamic";
 import Navbar from "containers/navbar/Navbar";
 import FooterSection from "containers/home/FooterSection";
-// import OrderSection from "containers/order/OrderSection";
-
+import { GetStaticProps } from "next";
 import { withAuth } from "constants/HOCs";
+import Head from "containers/head/Head";
+
+// import OrderSection from "containers/order/OrderSection";
 // const OrderSection = dynamic(() => import("containers/order/OrderSection"), {
 //   loading: () => <OrderSection />,
 // });
@@ -13,6 +15,7 @@ const OrderSection = dynamic(() => import("containers/order/OrderSection"));
 const orderPage = () => {
   return (
     <>
+      <Head title="历史订单" />
       <Navbar />
       <OrderSection />
       <FooterSection />
@@ -20,12 +23,10 @@ const orderPage = () => {
   );
 };
 
-// 此函数在构建时被调用
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {},
   };
-}
+};
 
-// export default orderPage;
-export default withAuth(3 * 60)(orderPage);
+export default withAuth()(orderPage);

@@ -8,12 +8,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;    
   }
-  body {    
-    /* max-width: 1440px; */
-    /* display: flex; */
-    /* justify-content: center;
-    margin: auto; */
-    /* min-height: 200vh; */
+  body {
     padding-top: ${NAV_HEIGHT};
   }
   img {

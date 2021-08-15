@@ -3,7 +3,6 @@ import {
   BasicInput,
   BasicInValidFeedback,
   BasicBtn,
-  BasicTextarea,
 } from "components/BasicElements";
 
 export const Container = styled.div`

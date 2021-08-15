@@ -3,16 +3,6 @@
 import axios from "axios";
 
 export function useAxios() {
-  // const { session } = useAuth();
-  // useEffect(() => {
-  //   console.log("初始化axios");
-  //   if (!session) {
-  //     return;
-  //   }
-  // // 更新token
-  //   console.log(session);
-  // }, [session]);
-
   const instance = axios.create({
     // baseURL: 'https://api.example.com'
   });
@@ -34,11 +24,7 @@ export function useAxios() {
   instance.interceptors.request.use((req) => {
     const token = localStorage.getItem("token");
     if (token) {
-      // req.headers.Authorization = `Token ${token}`;
       req.headers.Authorization = `JWT ${token}`;
-      // req.headers.Authorization = `Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2ODgwMzEwLCJqdGkiOiJiMmEzOTJmOTBiYmE0YzY0YmMxMzA3MmYwZTA3NzZkYiIsInVzZXJfaWQiOiI3ODQzYTkyNy1mZDFhLTRmMmEtYTQzMC1iZTRjYjUxYmRiMDAifQ.ll9re1sm0w90R_ylMNUenCUQlELnT2UTwuh72GZzLuw`;
-      // req.headers.Authorization = `Basic ${token}`;
-      // req.headers["Authorization"] = "Basic " + token;
     }
     return req;
   });
@@ -48,9 +34,15 @@ export function useAxios() {
       localStorage.setItem("token", newToken);
     }
   };
+  const setRefreshToken = (refreshToken) => {
+    if (refreshToken) {
+      localStorage.setItem("refreshToken", refreshToken);
+    }
+  };
 
   return {
     axios: instance,
     setAccessToken,
+    setRefreshToken,
   };
 }

@@ -24,7 +24,7 @@ const Form = async (
   setErrors
 ) => {
   const { axios } = useAxios();
-  let url = `${process.env.HOST}/create-checkout-session/`;
+  let url = `${process.env.NEXT_PUBLIC_HOST}/create-checkout-session/`;
   let form = new FormData();
   form.append("phone", values.phone);
   form.append("deliveryAddress", values.deliveryAddress);

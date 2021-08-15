@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { GetStaticProps } from "next";
+
 import Navbar from "containers/navbar/Navbar";
 import Stripe from "stripe";
 import _ from "lodash";
+import Head from "containers/head/Head";
 
 import {
   Container,
@@ -30,9 +33,6 @@ import FooterSection from "../containers/home/FooterSection";
 import { formatAmountForDisplay } from "constants/StripeUtils";
 import { useFormControls } from "components/cart/CartFormControls";
 
-// resource
-import menuItemPic from "public/images/home/menu_item.jpg";
-
 const CartPage = ({ menuList }) => {
   const [filterMenuName, setFilterMenuName] = useState("");
   const [menuItems, setMenuItems] = useState([]);
@@ -58,7 +58,7 @@ const CartPage = ({ menuList }) => {
     const carts = cartItems.map((i) => {
       return { quantity: i.custom_count, price: i.id };
     });
-    console.log("##carts:", carts);
+
     setFormValues({
       ...formValues,
       carts,
@@ -84,6 +84,7 @@ const CartPage = ({ menuList }) => {
   const productInCarts = (id) => {
     return _.find(cartItems, { id: id });
   };
+
   const addProduct = (id) => {
     const items = cartItems.slice();
     let item = _.find(items, { id: id });
@@ -94,6 +95,7 @@ const CartPage = ({ menuList }) => {
     items.splice(index, 1, item);
     setCartItems(items);
   };
+
   const reduceProduct = (id) => {
     const items = cartItems.slice();
     let item = _.find(items, { id: id });
@@ -121,6 +123,7 @@ const CartPage = ({ menuList }) => {
 
   return (
     <>
+      <Head />
       <Navbar />
       <Container>
         <MenuContainer>
@@ -238,8 +241,7 @@ const CartPage = ({ menuList }) => {
 
 export default CartPage;
 
-// 此函数在构建时被调用
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: "2020-08-27",
   });
@@ -258,4 +260,4 @@ export async function getStaticProps(context) {
   return {
     props: { menuList: prices },
   };
-}
+};

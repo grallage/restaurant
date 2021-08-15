@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { VscLoading } from "react-icons/vsc";
 
 export const BasicInput = styled(({ isInvalid, ...props }) => (
   <input
@@ -70,4 +71,32 @@ export const BasicBtn = styled.button`
     pointer-events: none;
     opacity: 0.65;
   }
+`;
+
+// loading
+export const Loading = styled(VscLoading)`
+  animation: loading 2s infinite;
+  font-size: 2.5rem;
+  @keyframes loading {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+export const LoadingContainer = styled(({ ...props }) => (
+  <div {...props} className={`${props.className}`}>
+    <Loading />
+  </div>
+))`
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 500px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
