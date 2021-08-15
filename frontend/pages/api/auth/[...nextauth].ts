@@ -4,7 +4,7 @@ import Providers from "next-auth/providers";
 import axios from "axios";
 import { JwtUtils } from "../../../constants/Utils";
 
-const debug = false;
+const debug = true;
 
 namespace NextAuthUtils {
   export const refreshToken = async function (refreshToken) {
@@ -141,6 +141,9 @@ const settings: NextAuthOptions = {
           }
         } else if (account.provider === "github") {
           const { accessToken } = account;
+          console.log(
+            `发送到服务器：${process.env.NEXT_PUBLIC_HOST}/api/social/login/github/`
+          );
           try {
             const response = await axios.post(
               `${process.env.NEXT_PUBLIC_HOST}/api/social/login/github/`,
