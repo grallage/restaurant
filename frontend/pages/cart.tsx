@@ -259,5 +259,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: { menuList: prices },
+    revalidate: 60 * 60, // In seconds
   };
 };

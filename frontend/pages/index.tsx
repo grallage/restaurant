@@ -40,5 +40,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       menuList,
     },
+    revalidate: 60 * 60, // In seconds
   };
 };
