@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useAxios } from "constants/AxiosConfig";
 import { useAuth } from "constants/Hooks";
 import {
@@ -19,6 +20,12 @@ import {
   OrderTotalPrice,
   OrderState,
   CardBoxWrapper,
+  EmptyCartWrapper,
+  EmptyCartIcon,
+  EmptyCartTitle,
+  EmptyCartSubtitle,
+  ButtonGroup,
+  Button,
 } from "components/order/OrderElements";
 import { formatAmountForDisplay } from "constants/StripeUtils";
 import { LoadingContainer } from "components/BasicElements";
@@ -51,7 +58,22 @@ const OrderSection = () => {
         <Container>
           <Wrapper>
             <Orders>
+              {orders && orders.length === 0 && (
+                <EmptyCartWrapper>
+                  <EmptyCartIcon />
+                  <EmptyCartTitle>还没有历史订单记录</EmptyCartTitle>
+                  <EmptyCartSubtitle>
+                    还等什么，点击下方立即订餐！
+                  </EmptyCartSubtitle>
+                  <ButtonGroup>
+                    <Link href="/cart">
+                      <Button>立即下单</Button>
+                    </Link>
+                  </ButtonGroup>
+                </EmptyCartWrapper>
+              )}
               {orders &&
+                orders.length > 0 &&
                 orders.map((order) => {
                   return (
                     <Order key={order.id}>

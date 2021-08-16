@@ -33,6 +33,11 @@ export namespace JwtUtils {
 
     return true;
   };
+  export const getExp = (token: string) => {
+    const decoded = jwt.decode(token);
+    // console.log(`#### decode token = ${decoded["exp"]}`);
+    return decoded["exp"];
+  };
 }
 
 export namespace UrlUtils {

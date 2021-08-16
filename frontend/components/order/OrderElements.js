@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export const Container = styled.section`
   margin-bottom: 100px;
@@ -97,4 +98,46 @@ export const OrderState = styled.div`
   text-align: center;
   flex: 1 1 auto;
   padding: 1rem;
+`;
+
+export const EmptyCartWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+`;
+export const EmptyCartIcon = styled(AiOutlineShoppingCart)`
+  font-size: 3rem;
+`;
+export const EmptyCartTitle = styled.h2``;
+export const EmptyCartSubtitle = styled.p``;
+export const ButtonGroup = styled.div`
+  margin-top: auto;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+export const Button = styled.a`
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 1rem 5rem;
+  background-color: black;
+  border: 1px solid black;
+  cursor: pointer;
+  letter-spacing: 0.5ch;
+  font-weight: bold;
+
+  transition: color 300ms ease, border 300ms ease, background-color 300ms ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+    background-color: white;
+    border: 1px solid ${({ theme }) => theme.colors.primary};
+  }
 `;

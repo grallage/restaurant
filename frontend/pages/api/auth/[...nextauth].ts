@@ -52,6 +52,7 @@ const settings: NextAuthOptions = {
       scope: "read:user",
     }),
     Providers.Credentials({
+      id: "credentials",
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: "DjangoServer",
       // The credentials is used to generate a suitable form on the sign in page.
@@ -87,7 +88,7 @@ const settings: NextAuthOptions = {
         if (response?.data?.user) {
           const { user, access_token, refresh_token } = response.data;
           user.accessToken = access_token;
-          user.refreshtoken = refresh_token;
+          user.refreshToken = refresh_token;
           user.name = user.username;
           return user;
         } else {
@@ -143,9 +144,9 @@ const settings: NextAuthOptions = {
           }
         } else if (account.provider === "github") {
           const { accessToken } = account;
-          console.log(
-            `发送到服务器：${process.env.NEXT_PUBLIC_HOST}/api/social/login/github/`
-          );
+          // console.log(
+          //   `发送到服务器：${process.env.NEXT_PUBLIC_HOST}/api/social/login/github/`
+          // );
           try {
             const response = await axios.post(
               `${process.env.NEXT_PUBLIC_HOST}/api/social/login/github/`,
@@ -162,7 +163,7 @@ const settings: NextAuthOptions = {
               refreshToken: refresh_token,
               loginType: "github",
             };
-            console.log(`返回token=${token.accessToken}`);
+
             return token;
           } catch (error) {
             console.log(
@@ -171,6 +172,10 @@ const settings: NextAuthOptions = {
 
             return null;
           }
+        } else if ((account.type = "credentials")) {
+          const { accessToken, refreshToken } = user;
+          token.accessToken = accessToken;
+          token.refreshToken = refreshToken;
         } else {
           const { accessToken } = user;
           token.accessToken = accessToken;
@@ -181,6 +186,7 @@ const settings: NextAuthOptions = {
       // user was signed in previously, we want to check if the token needs refreshing
       // token has been invalidated, try refreshing it
       console.log(`检查token是否过期`);
+
       if (
         token?.refreshToken &&
         JwtUtils.isJwtExpired(token.accessToken as string)
@@ -194,7 +200,7 @@ const settings: NextAuthOptions = {
             accessToken: newAccessToken,
             refreshToken: newRefreshToken,
             iat: Math.floor(Date.now() / 1000),
-            exp: Math.floor(Date.now() / 1000 + 2 * 60 * 60),
+            exp: Math.floor(Date.now() / 1000 + 2 * 60 * 60), // 2 hour
           };
 
           return token;

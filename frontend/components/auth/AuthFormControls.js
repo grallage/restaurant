@@ -23,7 +23,7 @@ const SigninForm = async (values, successCallback, errorCallback) => {
     email: values.email,
   });
   console.log("登录结果:", response);
-  if (response.error) {
+  if (response?.error) {
     errorCallback("登录信息错误");
     return false;
   } else {
