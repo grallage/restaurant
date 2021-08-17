@@ -100,3 +100,13 @@ export const LoadingContainer = styled(({ ...props }) => (
   justify-content: center;
   align-items: center;
 `;
+
+export const TextContainer = styled.div`
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 500px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

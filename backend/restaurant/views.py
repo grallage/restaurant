@@ -86,31 +86,17 @@ def create_checkout_session(request):
         # client_reference_id=request.user.id if request.user.is_authenticated else None,
         # https://stripe.com/docs/api/checkout/sessions/create
         payment_method_types=["card"],
-        # line_items=[
-        #     {
-        #         # "price_data": {
-        #         #     "currency": "usd",
-        #         #     "product_data": {
-        #         #         "name": "T-shirt",
-        #         #     },
-        #         #     "unit_amount": 2000,
-        #         # },
-        #         "price": "price_1JE5sZHcX0kp4ynFFZDDpB5p",  # https://dashboard.stripe.com/test/products/prod_JrpXouThGfRrqb
-        #         "quantity": 1,
-        #     }
-        # ],
         line_items=carts,
         mode="payment",
-        success_url=settings.FRONTEND_URL,
-        # success_url="http://localhost:3000?session_id={CHECKOUT_SESSION_ID}",
+        # success_url=settings.FRONTEND_URL,
+        success_url=settings.FRONTEND_URL
+        + "/order/success?session_id={CHECKOUT_SESSION_ID}",
         cancel_url="{url}/cart".format(url=settings.FRONTEND_URL),
         metadata={
             "phone": phone,
             "remark": remark,
             "deliveryAddress": deliveryAddress,
         },
-        #
-        # customer_email=customer_email,
         customer=stripe_customer_id,
     )
 
