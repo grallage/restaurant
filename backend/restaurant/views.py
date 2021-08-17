@@ -68,7 +68,7 @@ def retrieve_price_product(request):
 @api_view(["POST"])
 @authentication_classes((JWTCookieAuthentication,))
 # @permission_classes((IsAuthenticated,))
-# @permission_classes((AllowAny,))
+@permission_classes((AllowAny,))
 def create_checkout_session(request):
     phone = request.POST["phone"]
     remark = request.POST["remark"]
